@@ -1,4 +1,5 @@
 import csv
+import itertools
 # Create a class to hold a city location. Call the class "City". It should have
 # fields for name, lat and lon (representing latitude and longitude).
 
@@ -9,8 +10,6 @@ class City:
         self.lat = lat
         self.lon = lon
 
-    def __str__(self):
-        return f'{self.name}, {str(self.lat)}, {str(self.lon)}'
 
 
 # We have a collection of US cities with population over 750,000 stored in the
@@ -30,13 +29,14 @@ cities = []
 
 def cityreader(cities=[]):
     # TODO Implement the functionality to read from the 'cities.csv' file
-    with open('/Users/lotso/Documents/Sprint-Challenge--Intro-Python-master/src/cityreader/cities.csv', 'r') as csv_file:
-        csv_reader = csv.reader(csv_file)
+    with open('/Users/lotso/Documents/Sprint-Challenge--Intro-Python-master/src/cityreader/cities.csv', 'r', newline="") as csv_file:
+        csv_reader = csv.reader(itertools.islice(csv_file, 1, None))
         
         for line in csv_reader:
             # For each city record, create a new City instance and add it to the
             # `cities` list
-            
+            # if line[0] == 'city' and line[3] == 'lat' and line[4] == 'lon':
+
             # print(line)
             cities.append(City(line[0], line[3], line[4]))
             
@@ -46,8 +46,8 @@ def cityreader(cities=[]):
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
-for c in cities[1:]:
-    print(c)
+for c in cities:
+    print(c.name, c.lat, c.lon)
 
 # STRETCH GOAL!
 #
