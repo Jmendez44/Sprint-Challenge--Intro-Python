@@ -38,7 +38,7 @@ def cityreader(cities=[]):
             # if line[0] == 'city' and line[3] == 'lat' and line[4] == 'lon':
 
             # print(line)
-            cities.append(City(line[0], line[3], line[4]))
+            cities.append(City(line[0], float(line[3]), float(line[4])))
             
         return cities
 
@@ -47,7 +47,7 @@ cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
 for c in cities:
-    print(c.name, c.lat, c.lon)
+    print(str(c.name), float(c.lat), float(c.lon))
 
 # STRETCH GOAL!
 #
